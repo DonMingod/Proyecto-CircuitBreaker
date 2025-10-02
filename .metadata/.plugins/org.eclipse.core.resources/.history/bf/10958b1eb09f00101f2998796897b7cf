@@ -1,0 +1,5 @@
+package com.huisa.exceptions;
+
+public class MiExcepcionIgnorada {
+
+}

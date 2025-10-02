@@ -1,0 +1,5 @@
+package com.huisa.config;
+
+public class Resilience4jConfig {
+
+}

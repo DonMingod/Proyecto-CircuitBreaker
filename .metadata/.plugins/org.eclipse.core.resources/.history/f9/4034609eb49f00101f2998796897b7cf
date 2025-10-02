@@ -1,0 +1,25 @@
+package com.huisa.external;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
+
+@SpringBootApplication
+@RestController
+public class DummyExternalApp {
+	
+	   public static void main(String[] args) {
+	        SpringApplication app = new SpringApplication(DummyExternalApp.class);
+	        // Cambia el puerto a 8081
+	        app.setDefaultProperties(Collections.singletonMap("server.port", "8081"));
+	        app.run(args);
+	    }
+
+	    @GetMapping("/")
+	    public String home() {
+	        return "Servicio externo OK!";
+	    }
+
+}

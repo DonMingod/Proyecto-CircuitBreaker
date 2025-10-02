@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: web-circuitbreaker
+
+  resilience4j:
+  circuitbreaker:
+    instances:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        waitDurationInOpenState: 10s
+        failureRateThreshold: 50
+        eventConsumerBufferSize: 10
+        recordExceptions:
+          - java.io.IOException
+          - java.util.concurrent.TimeoutException
+        ignoreExceptions:
+          - com.example.miapp.exceptions.MiExcepcionIgnorada
+  timelimiter:
+    instances:
+      miCircuitBreaker:
+        timeoutDuration: 2s
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: resilience4j.circuitbreakers

@@ -1,0 +1,21 @@
+package com.huisa.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.huisa.service.ExternalService;
+
+@RestController
+@RequestMapping("/api")
+public class ApiController {
+	
+	@Autowired
+	private ExternalService externalService;
+     
+	  @GetMapping("/test-circuit-breaker")
+	public String testCircuitBreaker() {
+		return externalService.callExternalService();
+	}
+}

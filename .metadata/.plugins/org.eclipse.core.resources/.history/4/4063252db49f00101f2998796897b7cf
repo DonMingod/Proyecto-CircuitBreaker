@@ -1,0 +1,5 @@
+package com.huisa.external;
+
+public class DummyExternalApp {
+
+}

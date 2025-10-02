@@ -1,0 +1,25 @@
+package com.huisa.config;
+
+import java.time.Duration;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import io.github.resilience4j.circuitbreaker.CircuitBreakerConfig;
+
+@Configuration
+public class Resilience4jConfig {
+	
+	@Bean
+	public CircuitBreakerRegistry circuitBreakerRegistry () {
+		  
+		CircuitBreakerConfig config = CircuitBreakerConfig.custom()
+				.slidingWindowSize(10)
+		        .failureRateThreshold(50)
+		        .waitDurationInOpenState(Duration.ofSeconds(10))
+		        .recordException(Exception.class)
+		        .ignoreExceptions(IllegalArgumentException.class)
+		        .build();
+	}
+
+}

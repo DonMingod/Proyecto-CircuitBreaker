@@ -1,0 +1,5 @@
+package com.huisa.service;
+
+public class ExternalService {
+
+}

@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: web-circuitbreaker
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      miCircuitBreaker: 
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        waitDurationInOpenState: 10s
+        failureRateThreshold: 50
+        eventConsumerBufferSize: 10
+        slidingWindowType: COUNT_BASED 
+        recordExceptions:
+          - java.io.IOException
+          - java.util.concurrent.TimeoutException
+        ignoreExceptions:
+          - com.huisa.exceptions.MiExcepcionIgnorada
+
+  timelimiter:
+    instances:
+      miCircuitBreaker:
+        timeoutDuration: 2s
+
+  retry:
+    instances:
+      externalService:
+        maxAttempts: 3        
+        waitDuration: 500ms   
+        retryExceptions:
+          - java.io.IOException
+          - java.util.concurrent.TimeoutException
+
+  ratelimiter:
+    instances:
+      externalService:
+        limitForPeriod: 5      
+        limitRefreshPeriod: 1s  
+        timeoutDuration: 0     
+
+management: 
+  endpoints:
+    web:
+      exposure:
+        include: '*'
